@@ -1,6 +1,6 @@
-# Frontend Starter Angular 1.x
+# leffnote
 
-A simple project bootstrap for personal use. Nothing special, but you can check it out.
+An exercise. Make a note taking app similar to evernote or google keep.
 
 
 ## Install

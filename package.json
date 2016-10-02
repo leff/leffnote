@@ -1,26 +1,23 @@
 {
-  "name": "frontend-starter-angular1",
+  "name": "leffnote",
   "version": "1.0.0",
-  "description": "A simple project bootstrap for personal use. Nothing special, but you can check it out.",
-  "main": "index.js",
+  "description": "An exercise. Make a note taking app similar to evernote or google keep.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leff/frontend-starter-angular1.git"
+    "url": "git+https://github.com/leff/leffnote.git"
   },
   "keywords": [
-    "node",
-    "angular",
-    "frontend"
+    "notes"
   ],
   "author": "Jason Brackins",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leff/frontend-starter-angular1/issues"
+    "url": "https://github.com/leff/leffnote/issues"
   },
-  "homepage": "https://github.com/leff/frontend-starter-angular1#readme",
+  "homepage": "https://github.com/leff/leffnote#readme",
   "devDependencies": {
     "angular-mocks": "^1.5.8",
     "babel-preset-es2015": "^6.16.0",
@@ -42,6 +39,7 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-ui-router": "^0.3.1"
+    "angular-ui-router": "^0.3.1",
+    "angularfire": "^2.0.2"
   }
 }

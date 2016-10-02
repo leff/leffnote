@@ -1,6 +1,6 @@
 .container
   .page-header
-    h1 leffnote
+    h1 leffnote: notes
 
   div(ng-show="firebaseUser")
     p Hello, {{ firebaseUser.displayName }}
@@ -9,3 +9,14 @@
   div(ng-hide="firebaseUser")
     p Welcome, please sign in.
     button(ng-click="auth.$signInWithPopup('google')") Sign In With Google
+
+
+  div(ng-if="firebaseUser")
+    button(ng-click="addNote()") add
+
+  div
+    div(ng-repeat="note in filteredNotes")
+      h3 {{ note.title }}
+      p {{ note.content }}
+      button(ng-click="filteredNotes.$remove(note)") x
+

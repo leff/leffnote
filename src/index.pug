@@ -8,7 +8,17 @@ html
     link(link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
     link(link rel="stylesheet" href="app.css")
 
-    //- This uses my personal Font Awesome account
+    script(src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js")
+    script.
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCXk6DbEyv3id9i-YRbqF9m3Tly-RrKfQ8",
+        authDomain: "leffnote.firebaseapp.com",
+        databaseURL: "https://leffnote.firebaseio.com",
+        storageBucket: "leffnote.appspot.com",
+        messagingSenderId: "791824542322"
+      };
+      firebase.initializeApp(config);
     script(src="https://use.fontawesome.com/49266aa47a.js")
 
     //- script(src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js")
