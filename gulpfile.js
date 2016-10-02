@@ -21,7 +21,8 @@ const srcPath = './src/',
         `${destPath}/templates.js`,
 
         // local
-        `${srcPath}/**/*.js`
+        `${srcPath}/**/*.js`,
+        `!${srcPath}/**/*.spec.js`
       ];
 
 gulp.task('clean', function(callback) {
