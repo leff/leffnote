@@ -1,6 +1,6 @@
 describe('SampleController', function test() {
 
-  var $scope;
+  let $scope, createController;
 
   beforeEach(module('app'));
 
@@ -14,7 +14,7 @@ describe('SampleController', function test() {
   }));
 
   it('Sets scope', function testScope() {
-    var controller = createController();
+    let controller = createController();
     expect($scope.example).toEqual("Example");
   });
 

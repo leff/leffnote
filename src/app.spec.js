@@ -1,6 +1,6 @@
 describe('App', function test() {
 
-  var $scope;
+  let $scope;
 
   beforeEach(module('app'));
 

@@ -2,11 +2,10 @@ module.exports = function(config) {
   config.set({
     basePath: '.',
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-ui-router/release/angular-ui-router.js',
+      'build/vendor.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'build/templates.js',
-      'src/**/*.js',
+      'build/app.js',
       'src/**/*.spec.js'
     ],
     frameworks: ['jasmine'],
@@ -14,6 +13,16 @@ module.exports = function(config) {
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
       exitOnResourceError: true
+    },
+    // Only tests need to be processed (because we're testing against the built files)
+    preprocessors: {
+      'src/**/*.spec.js': ['babel']
+    },
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'],
+        sourceMap: 'inline'
+      }
     }
   });
 };

@@ -1,4 +1,5 @@
 (function() {
+
 angular.module('SampleModule', [])
 .controller('SampleController', SampleController)
 

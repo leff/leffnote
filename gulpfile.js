@@ -4,6 +4,7 @@ const gulp = require('gulp'),
       del = require('del'),
       sass = require('gulp-sass'),
       pug = require('gulp-pug'),
+      babel = require('gulp-babel'),
       concat = require('gulp-concat-sourcemap'),
       templateCache = require('gulp-angular-templatecache'),
       browserSync = require('browser-sync').create(),
@@ -12,11 +13,12 @@ const gulp = require('gulp'),
 
 const srcPath = './src/',
       destPath = 'build/',
-      jsToConcat = [
+      vendorJS = [
         // vendor
         'node_modules/angular/angular.js',
         'node_modules/angular-ui-router/release/angular-ui-router.js',
-
+      ],
+      appJS = [
         // templates
         `${destPath}/templates.js`,
 
@@ -48,9 +50,16 @@ gulp.task('templateCache', ['pug'], function () {
     .pipe( gulp.dest(destPath) );
 });
 
-gulp.task('concat:js', ['clean', 'templateCache'], function() {
-  return gulp.src( jsToConcat )
+gulp.task('js:app', ['clean', 'templateCache'], function() {
+  return gulp.src( appJS )
+    .pipe( babel({ presets: ['es2015'] }) )
     .pipe( concat('app.js') )
+    .pipe( gulp.dest( destPath ) );
+});
+
+gulp.task('js:vendor', ['clean'], function() {
+  return gulp.src( vendorJS )
+    .pipe( concat('vendor.js') )
     .pipe( gulp.dest( destPath ) );
 });
 
@@ -59,7 +68,7 @@ gulp.task('assets', ['clean'], function () {
     .pipe( gulp.dest(`${destPath}/assets`) );
 });
 
-gulp.task('build', ['sass', 'concat:js', 'assets']);
+gulp.task('build', ['sass', 'js:vendor', 'js:app', 'assets']);
 
 gulp.task('watch', ['build'], function() {
   return gulp.watch( `${srcPath}/**/*`, ['build'] );
@@ -87,7 +96,7 @@ gulp.task('server', ['watch'], function() {
 /**
  * Run test once and exit
  */
-gulp.task('test', function (done) {
+gulp.task('test', ['build'], function (done) {
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
