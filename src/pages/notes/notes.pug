@@ -12,11 +12,29 @@
 
 
   div(ng-if="firebaseUser")
-    button(ng-click="addNote()") add
+    .row
+      .col-xs-12.col-md-4
+        form
+          .form-group
+            label(for="newnote-title") Title
+            input.form-control(type="text" id="newnote-title" ng-model="newnote.title")
+          .form-group
+            label(for="newnote-src") Source Url
+            input.form-control(type="text" id="newnote-src" ng-model="newnote.src")
+          .form-group
+            label(for="newnote-content") Note
+            textarea.form-control(id="newnote-content" ng-model="newnote.content")
 
-  div
-    div(ng-repeat="note in filteredNotes")
-      h3 {{ note.title }}
-      p {{ note.content }}
-      button(ng-click="filteredNotes.$remove(note)") x
+          button.btn.btn-primary(ng-click="addNote()") add
+
+      .col-xs-12.col-md-8
+        div
+          .media(ng-repeat="note in filteredNotes")
+            .media-left
+              a(href="{{ note.src }}")
+                img.media-object(src="assets/leff-logo/leff-logo-orange-0.5x.png")
+            .media-body
+              h4.media-heading {{ note.title }}
+              | {{ note.content }}
+              button(ng-click="filteredNotes.$remove(note)") x
 

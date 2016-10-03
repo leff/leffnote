@@ -80,7 +80,7 @@ gulp.task('server', ['watch'], function() {
     server: { baseDir: destPath }
   });
 
-  gulp.watch([`${destPath}/**/*`]).on('change', browserSync.reload);
+  // gulp.watch([`${destPath}/**/*`]).on('change', browserSync.reload);
 });
 
 

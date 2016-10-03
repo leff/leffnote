@@ -4,22 +4,24 @@ angular.module('Notes', ['firebase'])
 .controller('NotesController', NotesController)
 
 function NotesController($scope, currentAuth, $firebaseArray) {
-  let i = 1;
   $scope.firebaseUser = currentAuth;
-
-  console.log("user", $scope.firebaseUser);
+  $scope.newnote = {};
 
   let notesRef = firebase.database().ref().child('notes').child(currentAuth.uid);
   $scope.notes = $firebaseArray(notesRef); // for adding too, etc
 
-  let query = notesRef.orderByChild('timestamp').limitToLast(25);
+  let query = notesRef.orderByChild('sortstamp').limitToLast(25);
   $scope.filteredNotes = $firebaseArray(query); // for display
 
   $scope.addNote = () => {
+    let n = angular.copy($scope.newnote);
     $scope.notes.$add({
-      title: `My New Note ${i++}`,
-      content: 'Some text for you. Cool.'
-    })
+      title: n.title,
+      src: n.src,
+      content: n.content,
+      sortstamp: 0 - Date.now()
+    });
+    $scope.newnote = {};
   }
 }
 
