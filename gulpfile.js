@@ -8,7 +8,6 @@ const gulp = require('gulp'),
       concat = require('gulp-concat-sourcemap'),
       templateCache = require('gulp-angular-templatecache'),
       browserSync = require('browser-sync').create(),
-      modRewrite = require('connect-modrewrite'),
       KarmaServer = require('karma').Server;
 
 const srcPath = './src/',
@@ -78,16 +77,7 @@ gulp.task('watch', ['build'], function() {
 gulp.task('server', ['watch'], function() {
   browserSync.init({
     port: 8547,
-    server: {
-      baseDir: destPath,
-      middleware: [
-        modRewrite(['^[^\\.]*$ /index.html [L]']), // anything without a dot gets passed to index.html (allowing assets to be served normally)
-        function (req, res, next) {
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          next();
-        }
-      ]
-    }
+    server: { baseDir: destPath }
   });
 
   gulp.watch([`${destPath}/**/*`]).on('change', browserSync.reload);
