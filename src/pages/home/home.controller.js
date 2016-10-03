@@ -1,9 +1,9 @@
 (function() {
 
-angular.module('SampleModule', ['firebase'])
-.controller('SampleController', SampleController)
+angular.module('Home', ['firebase'])
+.controller('HomeController', HomeController)
 
-function SampleController($scope, Auth, currentAuth) {
+function HomeController($scope, Auth, currentAuth) {
   $scope.auth = Auth;
   $scope.firebaseUser = currentAuth;
 

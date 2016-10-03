@@ -4,7 +4,7 @@ angular.module('app', [
   'ui.router',
   'templates',
   'firebase',
-  'SampleModule',
+  'Home',
   'Notes'
 ])
 .run(AuthConfiguration)
@@ -30,8 +30,8 @@ function RouteConfiguration($urlRouterProvider, $stateProvider) {
 
   $stateProvider.state( 'home', {
     url: '/',
-    templateUrl: 'modules/sample/sample.html',
-    controller: 'SampleController',
+    templateUrl: 'pages/home/home.html',
+    controller: 'HomeController',
     resolve: {
       // controller will not be loaded until $waitForSignIn resolves
       // Auth refers to our $firebaseAuth wrapper in the factory below
@@ -45,7 +45,7 @@ function RouteConfiguration($urlRouterProvider, $stateProvider) {
   $stateProvider.state( 'notes', {
     url: '/notes/',
     controller: 'NotesController',
-    templateUrl: 'modules/notes/notes.html',
+    templateUrl: 'pages/notes/notes.html',
     resolve: {
       // controller will not be loaded until $requireSignIn resolves
       // Auth refers to our $firebaseAuth wrapper in the factory below

@@ -4,32 +4,36 @@ describe('NotesController', function NotesControllerTest() {
 
   let $rootScope, $scope, $firebaseArray, currentAuth, createController, controller;
 
+  // woo, recursive child factory
+  function child() {
+    return {
+      child: child,
+      orderByChild: () => {
+        return {
+          limitToLast: () => {}
+        }
+      }
+    }
+  }
   // monkeypatch mock firebase
   window.firebase = {
     database: () => {
       return {
         ref: () => {
           return {
-            child: () => {
-              return {
-                orderByChild: () => {
-                  return {
-                    limitToLast: () => {}
-                  }
-                }
-              }
-            }
+            child: child
           }
         }
       }
     }
   };
 
+
   beforeEach( () => {
     module('Notes');
 
     module( ($provide) => {
-      $provide.value('currentAuth', {displayName: 'test'});
+      $provide.value('currentAuth', {displayName: 'test', uid: '12345'});
       $provide.value('$firebaseArray', () => { return [{title: 'test', content: 'test c'}]; });
     });
 
@@ -37,7 +41,7 @@ describe('NotesController', function NotesControllerTest() {
 
 
   beforeEach(
-    inject( (_$rootScope_, $controller, $firebaseArray) => {
+    inject( (_$rootScope_, $controller, currentAuth, $firebaseArray) => {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new();
       $controller = $controller;
