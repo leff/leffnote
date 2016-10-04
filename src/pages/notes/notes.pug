@@ -1,40 +1,36 @@
 .container
+  ln-nav(page-title="leffnote")
+
   .page-header
-    h1 leffnote: notes
+    h1 notes
 
-  div(ng-show="firebaseUser")
-    p Hello, {{ firebaseUser.displayName }}
-    img(src="{{ firebaseUser.photoURL }}")
-    button(ng-click="auth.$signOut()") Sign Out
-  div(ng-hide="firebaseUser")
-    p Welcome, please sign in.
-    button(ng-click="auth.$signInWithPopup('google')") Sign In With Google
-
-
-  div(ng-if="firebaseUser")
     .row
       .col-xs-12.col-md-4
-        form
-          .form-group
-            label(for="newnote-title") Title
-            input.form-control(type="text" id="newnote-title" ng-model="newnote.title")
-          .form-group
-            label(for="newnote-src") Source Url
-            input.form-control(type="text" id="newnote-src" ng-model="newnote.src")
-          .form-group
-            label(for="newnote-content") Note
-            textarea.form-control(id="newnote-content" ng-model="newnote.content")
+        .panel.panel-default
+          .panel-heading Add a note
+          .panel-body
+            form
+              .form-group
+                label(for="newnote-title") Title
+                input.form-control(type="text" id="newnote-title" ng-model="newnote.title")
+              .form-group
+                label(for="newnote-src") Source Url
+                input.form-control(type="text" id="newnote-src" ng-model="newnote.src")
+              .form-group
+                label(for="newnote-content") Note
+                textarea.form-control(id="newnote-content" ng-model="newnote.content")
 
-          button.btn.btn-primary(ng-click="addNote()") add
+              button.btn.btn-primary(ng-click="addNote()") add
 
       .col-xs-12.col-md-8
-        div
-          .media(ng-repeat="note in filteredNotes")
-            .media-left
-              a(href="{{ note.src }}")
-                img.media-object(src="assets/leff-logo/leff-logo-orange-0.5x.png")
-            .media-body
-              h4.media-heading {{ note.title }}
-              | {{ note.content }}
-              button(ng-click="filteredNotes.$remove(note)") x
+        ul.list-group
+          li.list-group-item(ng-repeat="note in filteredNotes")
+            .media
+              .media-left
+                a(href="{{ note.src }}")
+                  img.media-object(src="assets/leff-logo/leff-logo-orange-0.5x.png" style="max-width: 64px;")
+              .media-body
+                h4.media-heading {{ note.title }}
+                | {{ note.content }}
+                button(ng-click="filteredNotes.$remove(note)") x
 

@@ -1,6 +1,6 @@
 (function() {
 
-angular.module('Notes', ['firebase'])
+angular.module('app.Notes', ['firebase'])
 .controller('NotesController', NotesController)
 
 function NotesController($scope, currentAuth, $firebaseArray) {

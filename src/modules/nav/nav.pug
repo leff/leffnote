@@ -1,0 +1,23 @@
+
+nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      a.navbar-brand(ui-sref="home") leffnote
+
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li(ui-sref-active="active")
+          a(ui-sref="notes") Notes
+
+      ul.nav.navbar-nav.navbar-right
+        li
+          span(ng-show="vm.user")
+            | Hello, {{ vm.user.displayName }}
+            =" "
+            img(src="{{ vm.user.photoURL }}" style="height: 50px;")
+            =" "
+            a(ng-click="vm.logout()") Sign Out
+          span(ng-hide="vm.user")
+            | Welcome, please sign in.
+            =" "
+            a(ng-click="vm.login()") Sign In With Google

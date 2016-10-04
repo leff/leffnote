@@ -1,17 +1,17 @@
 (function(){
+'use strict';
 
 angular.module('app', [
   'ui.router',
   'templates',
   'firebase',
-  'Home',
-  'Notes'
+  'app.AuthService',
+  'app.Nav',
+  'app.Home',
+  'app.Notes'
 ])
 .run(AuthConfiguration)
-.config(RouteConfiguration)
-.factory('Auth', function($firebaseAuth) {
-  return $firebaseAuth();
-});
+.config(RouteConfiguration);
 
 // See https://github.com/firebase/angularfire/blob/master/docs/guide/user-auth.md
 
@@ -35,9 +35,9 @@ function RouteConfiguration($urlRouterProvider, $stateProvider) {
     resolve: {
       // controller will not be loaded until $waitForSignIn resolves
       // Auth refers to our $firebaseAuth wrapper in the factory below
-      currentAuth: function(Auth) {
+      currentAuth: function(AuthService) {
         // $waitForSignIn returns a promise so the resolve waits for it to complete
-        return Auth.$waitForSignIn();
+        return AuthService.firebaseAuth.$waitForSignIn();
       }
     }
   });
@@ -49,10 +49,10 @@ function RouteConfiguration($urlRouterProvider, $stateProvider) {
     resolve: {
       // controller will not be loaded until $requireSignIn resolves
       // Auth refers to our $firebaseAuth wrapper in the factory below
-      currentAuth: function(Auth) {
+      currentAuth: function(AuthService) {
         // $requireSignIn returns a promise so the resolve waits for it to complete
         // If the promise is rejected, it will throw a $stateChangeError (see above)
-        return Auth.$requireSignIn();
+        return AuthService.firebaseAuth.$requireSignIn();
       }
     }
   });

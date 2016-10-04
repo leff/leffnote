@@ -1,11 +1,5 @@
 .container
-  .page-header
-    h1 leffnote
+  ln-nav(page-title="leffnote")
 
-  div(ng-show="firebaseUser")
-    p Hello, {{ firebaseUser.displayName }}
-    img(src="{{ firebaseUser.photoURL }}")
-    button(ng-click="auth.$signOut()") Sign Out
-  div(ng-hide="firebaseUser")
-    p Welcome, please sign in.
-    button(ng-click="auth.$signInWithPopup('google')") Sign In With Google
+  .page-header
+    h1 Welcome to leffnote

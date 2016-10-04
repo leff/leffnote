@@ -30,7 +30,7 @@ describe('NotesController', function NotesControllerTest() {
 
 
   beforeEach( () => {
-    module('Notes');
+    module('app.Notes');
 
     module( ($provide) => {
       $provide.value('currentAuth', {displayName: 'test', uid: '12345'});
