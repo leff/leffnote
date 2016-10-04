@@ -13,9 +13,7 @@ function NavDirective() {
     controller: NavController,
     controllerAs: 'vm',
     bindToController: true,
-    scope: {
-      pageTitle: '@'
-    }
+    scope: {}
   }
 }
 

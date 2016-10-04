@@ -1,0 +1,22 @@
+.container
+  ln-nav
+
+  .page-header
+    h1 {{ note.title }}
+
+    .controls
+      a(ng-click="editNote()") edit
+      =" "
+      a(ng-click="removeNote()") remove
+
+    .row
+      .media
+        .media-left
+          img.media-object(src="assets/leff-logo/leff-logo-orange-0.5x.png" style="max-width: 128px;")
+        .media-body
+          h4.media-heading {{ note.title }}
+          div source: {{ note.src }}
+          | {{ note.content }}
+
+
+

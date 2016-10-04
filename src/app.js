@@ -8,7 +8,8 @@ angular.module('app', [
   'app.AuthService',
   'app.Nav',
   'app.Home',
-  'app.Notes'
+  'app.Notes',
+  'app.Note'
 ])
 .run(AuthConfiguration)
 .config(RouteConfiguration);
@@ -24,6 +25,16 @@ function AuthConfiguration($rootScope, $state) {
     }
   });
 }
+
+let resolveRequireSignin =  {
+  // controller will not be loaded until $requireSignIn resolves
+  // Auth refers to our $firebaseAuth wrapper in the factory below
+  currentAuth: function(AuthService) {
+    // $requireSignIn returns a promise so the resolve waits for it to complete
+    // If the promise is rejected, it will throw a $stateChangeError (see above)
+    return AuthService.firebaseAuth.$requireSignIn();
+  }
+};
 
 function RouteConfiguration($urlRouterProvider, $stateProvider) {
   $urlRouterProvider.otherwise('/');
@@ -46,15 +57,14 @@ function RouteConfiguration($urlRouterProvider, $stateProvider) {
     url: '/notes/',
     controller: 'NotesController',
     templateUrl: 'pages/notes/notes.html',
-    resolve: {
-      // controller will not be loaded until $requireSignIn resolves
-      // Auth refers to our $firebaseAuth wrapper in the factory below
-      currentAuth: function(AuthService) {
-        // $requireSignIn returns a promise so the resolve waits for it to complete
-        // If the promise is rejected, it will throw a $stateChangeError (see above)
-        return AuthService.firebaseAuth.$requireSignIn();
-      }
-    }
+    resolve: resolveRequireSignin
+  });
+
+  $stateProvider.state( 'notesView', {
+    url: '/notes/:id',
+    controller: 'NoteController',
+    templateUrl: 'pages/notes/note.html',
+    resolve: resolveRequireSignin
   });
 }
 

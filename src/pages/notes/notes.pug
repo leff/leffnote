@@ -24,7 +24,7 @@
 
       .col-xs-12.col-md-8
         ul.list-group
-          li.list-group-item(ng-repeat="note in filteredNotes")
+          li.list-group-item(ng-repeat="(noteKey, note) in filteredNotes")
             .media
               .media-left
                 a(href="{{ note.src }}")
@@ -32,5 +32,8 @@
               .media-body
                 h4.media-heading {{ note.title }}
                 | {{ note.content }}
-                button(ng-click="filteredNotes.$remove(note)") x
+                .controls
+                  a(ui-sref="notesView({id: note.$id})") view
+                  =" "
+                  a(ng-click="filteredNotes.$remove(note)") remove
 

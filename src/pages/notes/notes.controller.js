@@ -3,7 +3,7 @@
 angular.module('app.Notes', ['firebase'])
 .controller('NotesController', NotesController)
 
-function NotesController($scope, currentAuth, $firebaseArray) {
+function NotesController($scope, currentAuth, $firebaseArray, $firebaseObject) {
   $scope.firebaseUser = currentAuth;
   $scope.newnote = {};
 
@@ -22,6 +22,14 @@ function NotesController($scope, currentAuth, $firebaseArray) {
       sortstamp: 0 - Date.now()
     });
     $scope.newnote = {};
+  }
+
+  $scope.editNote = (note) => {
+    console.log(note);
+    let n = $firebaseObject(note);
+    console.log(n);
+    n.title = 'edited title';
+    n.$save();
   }
 }
 
